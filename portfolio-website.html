@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Guitar Teacher & Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --surface: #13131A;
+    --border: rgba(255,255,255,0.07);
+    --gold: #E8C84A;
+    --gold-dim: rgba(232,200,74,0.15);
+    --text: #E8E8F0;
+    --muted: rgba(232,232,240,0.45);
+    --accent: #7B5EFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(10,10,15,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(123,94,255,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(232,200,74,0.06) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(232,200,74,0.25);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-tag::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 5vw, 72px);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+
+  .hero-title .line-gold { color: var(--gold); font-style: italic; }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 440px;
+    margin-bottom: 40px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #000;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* HERO CARD */
+  .hero-card-wrap {
+    position: relative;
+  }
+
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(232,200,74,0.2), transparent 50%);
+    z-index: -1;
+  }
+
+  .card-avatar {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .card-role {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .pill {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .pill.gold { background: var(--gold-dim); border-color: rgba(232,200,74,0.3); color: var(--gold); }
+  .pill.purple { background: rgba(123,94,255,0.1); border-color: rgba(123,94,255,0.3); color: #a78bff; }
+
+  .availability {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(74,232,120,0.08);
+    border: 1px solid rgba(74,232,120,0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #4ae878;
+  }
+
+  .availability::before {
+    content: '●';
+    font-size: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* SERVICES */
+  .section {
+    padding: 100px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 50px);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 60px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(232,200,74,0.3);
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .service-price {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* FIVERR SECTION */
+  .fiverr-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 60px;
+  }
+
+  .fiverr-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .fiverr-gig {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .gig-header {
+    background: linear-gradient(135deg, rgba(232,200,74,0.1), rgba(123,94,255,0.1));
+    padding: 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .gig-icon { font-size: 36px; }
+
+  .gig-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .gig-body { padding: 24px 28px; }
+
+  .gig-package {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .gig-package:last-child { border-bottom: none; }
+
+  .gig-package-name { color: var(--muted); }
+  .gig-package-price { color: var(--gold); font-weight: 700; font-size: 16px; }
+
+  /* CONTACT */
+  .contact-section {
+    padding: 100px 60px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .contact-email {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 2px solid rgba(232,200,74,0.3);
+    padding-bottom: 4px;
+    margin: 32px 0 48px;
+    transition: border-color 0.2s;
+  }
+
+  .contact-email:hover { border-color: var(--gold); }
+
+  .social-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .section { padding: 60px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .fiverr-inner { grid-template-columns: 1fr; gap: 40px; }
+    .fiverr-section { padding: 60px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#guitar">Guitar</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag">Available for Work</div>
+      <h1 class="hero-title">
+        Developer.<br>
+        <span class="line-gold">Guitar Teacher.</span><br>
+        Problem Solver.
+      </h1>
+      <p class="hero-desc">
+        Computer Engineering student at Beykoz University with a passion for building things — digital and musical. I help people with code, tech, and guitar lessons.
+      </p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn-primary">See My Services</a>
+        <a href="#contact" class="btn-secondary">Get In Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Years Guitar</div>
+        </div>
+        <div>
+          <div class="stat-num">RTX 4050</div>
+          <div class="stat-label">Powered Setup</div>
+        </div>
+        <div>
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Available Online</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <div class="card-avatar">🎸</div>
+        <div class="card-name">Guitar & Code</div>
+        <div class="card-role">Computer Engineering Student · Guitar Teacher</div>
+        <div class="skill-pills">
+          <span class="pill gold">🎸 Guitar Lessons</span>
+          <span class="pill purple">💻 Web Dev</span>
+          <span class="pill">Python</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">PC Repair</span>
+          <span class="pill gold">🇮🇷 Persian</span>
+          <span class="pill">🇹🇷 Turkish</span>
+          <span class="pill">🇬🇧 English</span>
+        </div>
+        <div class="availability">Available for online lessons & freelance work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-eyebrow">What I Offer</div>
+  <h2 class="section-title">Services</h2>
+  <p class="section-sub">From guitar lessons to code — I can help you with a range of tasks online, fast and affordable.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎸</div>
+      <div class="service-title">Online Guitar Lessons</div>
+      <p class="service-desc">Beginner to intermediate lessons via Zoom. Learn chords, songs, strumming, and music theory at your own pace. Lessons in Persian, Turkish, or English.</p>
+      <div class="service-price">Starting at $15 / hour</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">💻</div>
+      <div class="service-title">Web Development</div>
+      <p class="service-desc">Simple landing pages, portfolio websites, and small web apps. Clean code, fast delivery. HTML, CSS, JavaScript, Python.</p>
+      <div class="service-price">Starting at $20 / project</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🐍</div>
+      <div class="service-title">Python Scripts & Automation</div>
+      <p class="service-desc">Automate boring tasks, scrape data, process files, write utilities. Give me a problem, I'll write the script.</p>
+      <div class="service-price">Starting at $10 / script</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🖥️</div>
+      <div class="service-title">Tech Support & PC Help</div>
+      <p class="service-desc">Fix your PC issues remotely, optimize your computer, help with software installation, settings, and troubleshooting.</p>
+      <div class="service-price">Starting at $10 / session</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <div class="service-title">Translation (Persian ↔ English)</div>
+      <p class="service-desc">Accurate Persian to English or English to Persian translation for documents, websites, or content.</p>
+      <div class="service-price">Starting at $5 / page</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📄</div>
+      <div class="service-title">Guitar Lesson PDFs</div>
+      <p class="service-desc">Downloadable chord charts, lesson plans, and beginner guides. Available in Persian and English. Perfect for self-learners.</p>
+      <div class="service-price">Starting at $5 / pack</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIVERR GIGS -->
+<div class="fiverr-section" id="guitar">
+  <div class="fiverr-inner">
+    <div>
+      <div class="section-eyebrow">Find Me On Fiverr</div>
+      <h2 class="section-title">Book a Session<br>or Order a Gig</h2>
+      <p class="section-sub" style="margin-bottom: 0;">
+        All my services are available on Fiverr with secure payment. Order directly, get results fast. I respond within a few hours.
+      </p>
+    </div>
+
+    <div>
+      <div class="fiverr-gig">
+        <div class="gig-header">
+          <div class="gig-icon">🎸</div>
+          <div class="gig-title">I will teach you guitar online — beginner to intermediate</div>
+        </div>
+        <div class="gig-body">
+          <div class="gig-package">
+            <span class="gig-package-name">Basic — 30 min lesson</span>
+            <span class="gig-package-price">$10</span>
+          </div>
+          <div class="gig-package">
+            <span class="gig-package-name">Standard — 1 hour lesson</span>
+            <span class="gig-package-price">$18</span>
+          </div>
+          <div class="gig-package">
+            <span class="gig-package-name">Premium — 4 lessons package</span>
+            <span class="gig-package-price">$60</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fiverr-gig" style="margin-top: 16px;">
+        <div class="gig-header">
+          <div class="gig-icon">💻</div>
+          <div class="gig-title">I will build a simple website or Python script for you</div>
+        </div>
+        <div class="gig-body">
+          <div class="gig-package">
+            <span class="gig-package-name">Basic — Landing page</span>
+            <span class="gig-package-price">$20</span>
+          </div>
+          <div class="gig-package">
+            <span class="gig-package-name">Standard — Multi-page site</span>
+            <span class="gig-package-price">$45</span>
+          </div>
+          <div class="gig-package">
+            <span class="gig-package-name">Premium — Web app</span>
+            <span class="gig-package-price">$100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-eyebrow">Let's Work Together</div>
+  <h2 class="section-title">Get In Touch</h2>
+  <p style="color: var(--muted); font-size: 15px; line-height: 1.8; margin-top: 16px;">
+    Whether you want guitar lessons, need a website, or have a tech problem — send me a message and I'll reply fast.
+  </p>
+  <a href="mailto:your@email.com" class="contact-email">your@email.com</a>
+  <div class="social-links">
+    <a href="#" class="social-link">🟢 Fiverr</a>
+    <a href="#" class="social-link">💼 Upwork</a>
+    <a href="#" class="social-link">📸 Instagram</a>
+    <a href="#" class="social-link">💻 GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 — Guitar Teacher & Developer</span>
+  <span>Built with 🎸 & ☕</span>
+</footer>
+
+</body>
+</html>
